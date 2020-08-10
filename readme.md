@@ -8,7 +8,7 @@ This project consists of creating a binary classifier using multiple binary clas
 * Encoding the data.
 * Testing algorithms
 
-## Conclusion
+## Observation
 - The best accuracy achieved on test data was from KNN algorithm at 60%.
 ## How To Use
 * It is better to create a [virtual](https://docs.python.org/3/library/venv.html) environment.
