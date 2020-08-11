@@ -18,8 +18,10 @@
         </header>
         <div class="container">
           {% block content %}
-                  <p>{{prediction_text}}</p>
-                  <span>This is the best accuracy out of all the models.</span>
+          <div class="home">
+    <h1>{{prediction_text}}</h1>
+    <p>This is the best accuracy out of all the models.</p>
+  		  </div>
           {% endblock %}
         </div>
       </body>

@@ -11,14 +11,16 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pickle
 
 
 # load the dataset
 training = read_csv('training.csv', sep =";", decimal=',')
 validation = read_csv('validation.csv', sep =";", decimal=',') # treat comma as decimal point
 
-sns.countplot(validation['classLabel'],label="Label")
-plt.show()
+# plot the no of yes/no
+# sns.countplot(validation['classLabel'],label="Label")
+# plt.show()
 
 def cleaning(dataframe):
     cols_to_drop = ['variable18'] 
@@ -133,6 +135,10 @@ print("Random Forest Accuracy for test data:", test_accuracy_rf)
 
 KNN = KNeighborsClassifier()
 KNN.fit(X_train, y_train) # fit the model for training data
+
+# Saving model to disk
+pickle.dump(KNN, open('model.pkl','wb'))
+
 prediction_training_knn = KNN.predict(X_train)
 self_accuracy_knn = accuracy_score(y_train, prediction_training_knn)
 print("\nKNN Accuracy for training data (self accuracy):", self_accuracy_knn)
