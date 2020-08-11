@@ -15,3 +15,7 @@ This project consists of creating a binary classifier using multiple binary clas
 * Install pandas, numpy and scikit-learn or run ```pip install -r requirements.txt```.
 * Navigate to the directory containing the files and exectute 
 ```py binay_classifier.py```.
+## Flask
+- By importing pickle we can save our model to server our results through Flask.
+* Run ```py app.py```.
+* Visit [http://localhost:5000/](http://localhost:5000/).
