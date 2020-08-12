@@ -9,7 +9,7 @@ This project consists of creating a binary classifier using multiple binary clas
 * Testing algorithms
 
 ## Observation
-- The best accuracy achieved on test data was from KNN algorithm at 60%.
+- The best accuracy achieved on test data was from KNN algorithm at 61%.
 ## How To Use
 * It is better to create a [virtual](https://docs.python.org/3/library/venv.html) environment.
 * Install pandas, numpy and scikit-learn or run ```pip install -r requirements.txt```.

@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from pandas import read_csv
 from numpy import nan
+from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -32,38 +33,20 @@ training = cleaning(training)
 validation = cleaning(validation)
 print(validation.describe())
 print(validation.isnull().sum())
-# print the first 20 rows of data
-print(validation.head(5))
-print(validation.dtypes)
 
-# one hot encoding
-# create new dummy columns to replace the old ones
+#label encoding; performed betther than hot encoding
 def encoding(dataframe):
-    cols_to_one_hot = ['variable1', 'variable4', 'variable5', 'variable6', 'variable7', 'variable9', 'variable10', 'variable12', 'variable13']
-    for i in cols_to_one_hot:
-            dummies = pd.get_dummies(dataframe[i], prefix=i, drop_first=False)
-            dataframe =pd.concat([dataframe, dummies], axis=1)
-            dataframe = dataframe.drop([i], axis=1)
-
-    dataframe['classLabel'] = dataframe['classLabel'].map({'yes.': 1, 'no.': 0})
+    cols = ['variable1', 'variable4', 'variable5', 'variable6', 'variable7', 'variable9', 'variable10', 'variable12', 'variable13']
+    for i in cols:
+        labelencoder = LabelEncoder() # creating instance of labelencoder
+        dataframe[i+'_cat'] = labelencoder.fit_transform(dataframe[i])# Assigning numerical values and storing in another column
+        dataframe = dataframe.drop([i], axis=1)
+    print(dataframe.head(5))
     return dataframe
-
+training['classLabel'] = training['classLabel'].map({'yes.': 1, 'no.': 0})
+validation['classLabel'] = validation['classLabel'].map({'yes.': 1, 'no.': 0})
 training=encoding(training)
 validation=encoding(validation)
-# Rearrange columns
-training['classLabel'] = training.pop('classLabel')
-training['variable4_l'] = training.pop('variable4_l')
-training['variable5_gg'] = training.pop('variable5_gg')
-training['variable6_r'] = training.pop('variable6_r')
-training['variable7_o'] = training.pop('variable7_o')
-training['variable13_p'] = training.pop('variable13_p')
-
-#copies of the columns to make the number of columns in validation equal to training
-validation['variable4_l'] = 0
-validation['variable5_gg'] = 0
-validation['variable6_r'] = 0
-validation['variable7_o'] = 0
-validation['variable13_p'] = 0
 
 print(training.head(5))
 print(validation.head(5))
